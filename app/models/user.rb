@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  has_many :attendances, dependent: :destroy
   # 「remember_token」という仮想属性の作成
   attr_accessor :remember_token
   before_save { self.email = email.downcase }

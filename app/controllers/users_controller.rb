@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   
   def index
     @users = User.paginate(page: params[:page])
+    @user = User.find_by(params[:id])
   end
   
   def show
@@ -15,7 +16,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html
       format.csv do
-        send_data render_to_string, filename: "勤怠情報.csv", type: :csv
+        send_data render_to_string, filename: "#{@first_day.strftime("%y年%m月")}勤怠情報.csv", type: :csv
       end
     end
   end
@@ -65,6 +66,17 @@ class UsersController < ApplicationController
     redirect_to users_url
   end
   
+  def import
+    if params[:csv_file].blank?
+      flash[:danger] = "インポートするCSVファイルを選択してください。"
+      redirect_to users_url
+    else
+      num = User.import(params[:csv_file])
+      flash[:success] = "#{num.to_s}件のユーザー情報を追加/更新しました。"
+      redirect_to users_url
+    end
+  end
+  
   private
     
     def user_params
@@ -72,6 +84,6 @@ class UsersController < ApplicationController
     end
     
     def basic_info_params
-      params.require(:user).permit(:department, :basic_time, :work_time)
+      params.require(:user).permit(:department, :basic_time, :work_time, :work_finish_time)
     end
 end

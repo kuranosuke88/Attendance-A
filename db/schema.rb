@@ -32,8 +32,11 @@ ActiveRecord::Schema.define(version: 20191226114437) do
     t.string "remember_digest"
     t.boolean "admin", default: false
     t.string "department"
-    t.datetime "basic_time", default: "2019-12-28 23:00:00"
-    t.datetime "work_time", default: "2019-12-28 22:30:00"
+    t.string "user_employee_number"
+    t.string "user_uid"
+    t.datetime "basic_time", default: "2020-01-03 23:00:00"
+    t.datetime "work_time", default: "2020-01-03 22:30:00"
+    t.datetime "work_finish_time", default: "2020-01-04 07:30:00"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

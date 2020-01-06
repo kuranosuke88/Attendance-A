@@ -7,13 +7,16 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete 'login', to: 'sessions#destroy'
   
+  # 出勤社員一覧
+  get '/bases', to: 'bases#index'
+  
   resources :users do
+      collection { post :import }
     member do
       get 'edit_basic_info'
       patch 'update_basic_info'
       get 'attendances/edit_one_month'
       patch 'attendances/update_one_month'
-      post :import
     end
     resources :attendances, only: :update
   end

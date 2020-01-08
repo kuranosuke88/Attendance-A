@@ -8,8 +8,7 @@ Rails.application.routes.draw do
   delete 'login', to: 'sessions#destroy'
   
   # 出勤社員一覧
-  get '/bases', to: 'bases#index'
-  
+  resources :bases
   resources :users do
       collection { post :import }
     member do

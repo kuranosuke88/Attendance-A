@@ -6,6 +6,8 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <%= form_with(model: @base, local: true) do |f| %>
+      <%= render 'shared/error_messages_base' %>
+    
       <%= f.label :base_number, "拠点番号", class: "label-#{yield(:class_text)}" %>
       <%= f.text_field :base_number, class: "form-control" %>
       

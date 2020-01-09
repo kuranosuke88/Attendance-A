@@ -1,4 +1,4 @@
-<% provide(:title, 'base_index') %>
+<% provide(:title, '拠点一覧') %>
 
 <h1>拠点一覧</h1>
 
@@ -12,15 +12,20 @@
       <th colspan="2">勤怠種類</th>
     </tr>
   </thead>
+  <thead>
   <% @bases.each do |base| %>
       <tr>
-        <td>
-            <%= link_to base.name, base %><br>
-            <%= link_to "削除", base, method: :delete,
+        <th colspan="3"><%= link_to "修正", "#", class: "btn btn-primary" %></th>
+        <th colspan="3">
+          <%= link_to "削除", base, method: :delete,
               data: { confirm: "削除してよろしいですか？" }, class: "btn btn-primary" %>
-        </td>
+        </th>
+        <td colspan="2"><%= base.base_number %></td>
+        <td colspan="2"><%= base.base_name %></td>
+        <td colspan="2"><%= base.attendance_type %></td>
       </tr>
   <% end %>
+  </thead>
 </table>
 
 <div class="add-base-information-btn">

@@ -1,4 +1,5 @@
 class BasesController < ApplicationController
+  
   def index
     @bases = Base.all
   end
@@ -10,11 +11,16 @@ class BasesController < ApplicationController
   def create
     @base = Base.new(base_params)
     if @base.save
-      flash[:success] = "拠点情報を作成しました。"
-      redirect_to @base
+      flash.now[:success] = "拠点情報を作成しました。"
+      redirect_to new
     else
-      flash[:success] = "ユーザー情報を追加/更新しました。"
       render :new
     end
   end
+  
+  private
+    
+    def base_params
+      params.require(:base).permit(:base_number, :base_name, :attendance_type)
+    end
 end

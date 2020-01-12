@@ -7,8 +7,12 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete 'login', to: 'sessions#destroy'
   
+  # 出勤中社員一覧
+  get 'list_of_attendees', to: 'list_of_attendees#index'
+  
   # 出勤社員一覧
   resources :bases
+  
   resources :users do
       collection { post :import }
     member do

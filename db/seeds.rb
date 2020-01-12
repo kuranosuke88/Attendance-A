@@ -9,20 +9,20 @@ User.create!(name: "管理者",
              admin: true)
 
 User.create!(name: "上長A",
-             email: "Superior1@email.com",
+             email: "superior1@email.com",
              user_employee_number: "002",
              user_uid: "1002",
              password: "password",
              password_confirmation: "password",
-             )
+             superior: true)
              
 User.create!(name: "上長B",
-             email: "Superior2@email.com",
+             email: "superior2@email.com",
              user_employee_number: "003",
              user_uid: "1003",
              password: "password",
              password_confirmation: "password",
-             )
+             superior: true)
           
 User.create!(name: "一般",
              email: "sample@email.com",

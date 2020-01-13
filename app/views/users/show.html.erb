@@ -28,7 +28,7 @@
 <div class="btn-users-show">
   <%= link_to "勤怠編集", attendances_edit_one_month_user_path(date: @first_day), class: "btn btn-primary" %>
   <%= link_to "CSV出力", user_path(date: @first_day, format: :csv), class: "btn btn-primary" %>
-  <%= link_to "勤怠修正ログ（承認済）", attendances_edit_one_month_user_path(date: @first_day), class: "btn btn-primary" %>
+  <%= link_to "勤怠修正記録（承認済）", attendances_attendances_log_user_path(date: @first_day), class: "btn btn-primary" %>
 </div>
 
 <div>
@@ -67,7 +67,7 @@
       <% @attendances.each do |day| %>
         <tr>
           <td>
-            <%= link_to "残業申請", attendances_edit_one_month_user_path(date: @first_day), class: "btn btn-primary" %>
+            <%= link_to "残業申請", attendances_edit_over_time_user_path(date: @first_day), remote: true, class: "btn btn-primary" %>
           </td>
           <td><%= l(day.worked_on, format: :short) %></td>
           <td>
@@ -149,3 +149,6 @@
     </tfoot>
   </table>
 </div>
+
+<!--モーダルウインドウ表示-->
+<div id="edit-over-time" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'static_pages#top'
   get '/signup', to: 'users#new'
+  get '/modify_basic_information', to: 'users#edit_info'
   
   # ログイン機能
   get '/login', to: 'sessions#new'
@@ -20,6 +21,9 @@ Rails.application.routes.draw do
       patch 'update_basic_info'
       get 'attendances/edit_one_month'
       patch 'attendances/update_one_month'
+      get 'attendances/attendances_log'
+      get 'attendances/edit_over_time'
+      patch 'attendances/update_over_time'
     end
     resources :attendances, only: :update
   end

@@ -48,6 +48,9 @@ class UsersController < ApplicationController
   def edit
   end
   
+  def edit_info
+  end
+  
   def update
     if @user.update_attributes(user_params)
       flash[:success] = "ユーザー情報を更新しました。"

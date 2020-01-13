@@ -1,0 +1,39 @@
+<% provide(:title, "勤怠修正記録") %>
+
+<h1>勤怠修正記録</h1>
+<%= link_to "リセット", "#", class: "btn btn-default" %>
+<p>年:</p>
+<%= form_for @user do |f| %>
+  <%= f.collection_select :name, User.where(params[:id]), :name, :name %>
+<% end %>
+<p>月:</p>
+<%= form_for @user do |f| %>
+  <%= f.collection_select :name, User.where(params[:id]), :name, :name %>
+<% end %>
+
+<table class="table-bordered table-condensed" id="bases-info">
+  <thead>
+    <tr>
+      <td colspan="3">日付</th>
+      <td colspan="3">変更前出社時間</th>
+      <td colspan="2">変更前退社時間</th>
+      <td colspan="2">変更後出社</th>
+      <td colspan="2">変更後退社</th>
+      <td colspan="2">指示者</th>
+      <td colspan="2">承認日</th>
+    </tr>
+  </thead>
+  <thead>
+  <% @users.each do |user| %>
+      <tr>
+        <th colspan="3"></th>
+        <th colspan="3"></th>
+        <td colspan="2"></td>
+        <td colspan="2"></td>
+        <td colspan="2"></td>
+        <td colspan="2"></td>
+        <td colspan="2"></td>
+      </tr>
+  <% end %>
+  </thead>
+</table>

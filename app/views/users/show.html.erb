@@ -25,6 +25,22 @@
   </table>
 </div>
 
+<% if current_user.superior? %>
+  <p>
+  【所属長承認申請のお知らせ】
+  <% if @user.errors.any? %>
+  <div id="error_explanation">
+    <div class="alert alert-danger">
+      <%= @user.errors.count %>件の通知があります。
+    </div>
+  </div>
+<% end %></p>
+  <p>【勤怠変更申請のお知らせ】</p>
+  <p>【残業申請のお知らせ】</p>
+<% else %>
+  <p></p>
+<% end %>
+
 <div class="btn-users-show">
   <%= link_to "勤怠編集", attendances_edit_one_month_user_path(date: @first_day), class: "btn btn-primary" %>
   <%= link_to "CSV出力", user_path(date: @first_day, format: :csv), class: "btn btn-primary" %>

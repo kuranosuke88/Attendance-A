@@ -31,7 +31,7 @@
   <% if @user.errors.any? %>
   <div id="error_explanation">
     <div class="alert alert-danger">
-      <%= @user.errors.count %>件の通知があります。
+      <%= @count %>件の通知があります。
     </div>
   </div>
 <% end %></p>
@@ -83,7 +83,7 @@
       <% @attendances.each do |day| %>
         <tr>
           <td>
-            <%= link_to "残業申請", attendances_edit_over_time_user_path(date: @first_day), remote: true, class: "btn btn-primary" %>
+            <%= link_to "残業申請", attendances_edit_over_time_user_path(@user, params: { day: day.worked_on  }), remote: true, class: "btn btn-primary" %>
           </td>
           <td><%= l(day.worked_on, format: :short) %></td>
           <td>

@@ -48,6 +48,7 @@ class AttendancesController < ApplicationController
   end
   
   def edit_over_time
+    @day=Date.parse(params[:day])
   end
   
   private

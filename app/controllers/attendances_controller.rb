@@ -1,8 +1,8 @@
 class AttendancesController < ApplicationController
   before_action :set_user, only: %i(edit_one_month update_one_month attendances_log edit_over_time)
-  before_action :logged_in_user, only: %i(update edit_one_month)
-  before_action :admin_or_correct_user, only: %i(update edit_one_month update_one_month)
-  before_action :set_one_month, only: %i(edit_one_month)
+  before_action :logged_in_user, only: %i(update edit_one_month edit_over_time)
+  before_action :admin_or_correct_user, only: %i(update edit_one_month update_one_month edit_over_time)
+  before_action :set_one_month, only: %i(edit_one_month edit_over_time)
   
   UPDATE_REEOR_MSG = "勤怠登録に失敗しました。やり直してください。"
 
@@ -49,12 +49,13 @@ class AttendancesController < ApplicationController
   
   def edit_over_time
     @day=Date.parse(params[:day])
+    @attendance = Attendance.find(params[:id])
   end
   
   private
     # １か月分の勤怠情報を扱う.
     def attendances_params
-      params.require(:user).permit(attendances: [:started_at, :finished_at, :note ])[:attendances]
+      params.require(:user).permit(attendances: [:started_at, :finished_at, :note, :end_time ])[:attendances]
     end
     
     # beforeフィルター

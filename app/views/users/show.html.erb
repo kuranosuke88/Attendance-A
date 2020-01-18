@@ -83,7 +83,7 @@
       <% @attendances.each do |day| %>
         <tr>
           <td>
-            <%= link_to "残業申請", attendances_edit_over_time_user_path(@user, params: { day: day.worked_on  }), remote: true, class: "btn btn-primary" %>
+            <%= link_to "残業申請", attendances_edit_over_time_user_path(@user, params: { day: day.worked_on  }), class: "btn btn-primary" %>
           </td>
           <td><%= l(day.worked_on, format: :short) %></td>
           <td>

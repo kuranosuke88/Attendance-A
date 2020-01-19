@@ -1,8 +1,10 @@
 class AttendancesController < ApplicationController
-  before_action :set_user, only: %i(edit_one_month update_one_month attendances_log edit_over_time)
+  protect_from_forgery
+  before_action :set_user, only: %i(edit_one_month update_one_month attendances_log edit_over_time update_over_time)
   before_action :logged_in_user, only: %i(update edit_one_month edit_over_time)
   before_action :admin_or_correct_user, only: %i(update edit_one_month update_one_month edit_over_time)
-  before_action :set_one_month, only: %i(edit_one_month edit_over_time)
+  before_action :set_one_month, only: %i(edit_one_month)
+  before_action :set_one_day, only: %i(edit_over_time)
   
   UPDATE_REEOR_MSG = "勤怠登録に失敗しました。やり直してください。"
 
@@ -48,14 +50,26 @@ class AttendancesController < ApplicationController
   end
   
   def edit_over_time
-    @day=Date.parse(params[:day])
-    @attendance = Attendance.find(params[:id])
+  end
+  
+  def update_over_time
+    ActiveRecord::Base.transaction do
+      attendances_params.each do |id, item|
+        attendance = Attendance.find(id)
+        attendance.update_attributes!(item)
+      end
+    end
+    flash[:success] = "終了予定時間を申請しました。"
+    redirect_to user_url(date: params[:date])
+  rescue ActiveRecord::RecordInvalid
+    flash[:danger] = "無効な入力データがあったため、更新をキャンセルしました。"
+    redirect_to attendances_edit_over_time_user_url(date: params[:date])
   end
   
   private
     # １か月分の勤怠情報を扱う.
     def attendances_params
-      params.require(:user).permit(attendances: [:started_at, :finished_at, :note, :end_time ])[:attendances]
+      params.require(:user).permit(attendances: [:started_at, :finished_at, :note, :end_time])[:attendances]
     end
     
     # beforeフィルター

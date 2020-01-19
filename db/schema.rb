@@ -44,9 +44,9 @@ ActiveRecord::Schema.define(version: 20200118143952) do
     t.string "department"
     t.string "user_employee_number"
     t.string "user_uid"
-    t.datetime "basic_time", default: "2020-01-17 23:00:00"
-    t.datetime "work_time", default: "2020-01-17 22:30:00"
-    t.datetime "work_finish_time", default: "2020-01-18 07:30:00"
+    t.datetime "basic_time", default: "2020-01-18 23:00:00"
+    t.datetime "work_time", default: "2020-01-18 22:30:00"
+    t.datetime "work_finish_time", default: "2020-01-19 07:30:00"
     t.boolean "superior"
     t.index ["email"], name: "index_users_on_email", unique: true
   end

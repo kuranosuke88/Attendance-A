@@ -63,11 +63,11 @@ class ApplicationController < ActionController::Base
   
   # ページ出力前に1日分のデータの存在を確認・セットします。
   def set_one_day
-    @first_day = params[:day].nil? ?
+    @day = params[:day].nil? ?
     Date.current.beginning_of_day : params[:day].to_date
-    one_day = [@first_day]
+    one_day = [@day]
     
-    @attendances = @user.attendances.where(worked_on: @first_day)
+    @attendances = @user.attendances.where(worked_on: @day)
     unless one_day.count == @attendances.count
       ActiveRecord::Base.transaction do
         one_day.each { |day| @user.attendances.create!(worked_on: day) }

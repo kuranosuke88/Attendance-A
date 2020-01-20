@@ -59,17 +59,17 @@ class AttendancesController < ApplicationController
         attendance.update_attributes!(item)
       end
     end
-    flash[:success] = "終了予定時間を申請しました。"
-    redirect_to user_url(date: params[:date])
+      flash[:success] = "終了予定時間を申請しました。"
+      redirect_to user_url(date: params[:day])
   rescue ActiveRecord::RecordInvalid
     flash[:danger] = "無効な入力データがあったため、更新をキャンセルしました。"
-    redirect_to attendances_edit_over_time_user_url(date: params[:date])
+    redirect_to attendances_edit_over_time_user_url(date: params[:day])
   end
   
   private
     # １か月分の勤怠情報を扱う.
     def attendances_params
-      params.require(:user).permit(attendances: [:started_at, :finished_at, :note, :end_time])[:attendances]
+      params.require(:user).permit(attendances: [:started_at, :finished_at, :note, :end_time, :process_contents])[:attendances]
     end
     
     # beforeフィルター

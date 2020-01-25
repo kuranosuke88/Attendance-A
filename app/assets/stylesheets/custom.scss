@@ -45,6 +45,10 @@ h2 {
   color: #777;
 }
 
+h4 {
+  text-align: center;
+}
+
 p {
   font-size: 1.1em;
   line-height: 1.7em;
@@ -105,4 +109,16 @@ p {
 
 .panel-body {
   padding: 0px;
+}
+
+/* お知らせリンクの枠 */
+
+.waku {
+  padding: 0.1em 0.1em;
+  margin: 7px;
+  color: black;/*文字色*/
+  background: #FFF;
+  border: solid 2px #A94442;/*線*/
+  border-radius: 10px;/*角の丸み*/
+  width: 400px;
 }

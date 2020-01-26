@@ -160,8 +160,8 @@
         <td colspan="2"><%= format("%.2f", @total_working_times.to_f) %></td>
         <td colspan="9"></td>
         <td rowspan="2">
-          <%= form_for @user do |f| %>
-            <%= f.collection_select :name, User.where(params[:id]), :name, :name %>
+          <%= form_with(model: @user) do |f| %>
+            <%= f.collection_select :superior_sign, User.where(superior: true), :id, :name, :include_blank => "選択してください" %>
           <% end %>
           <div class="btn-Application-for-approval">
             <%= link_to "承認申請", attendances_edit_one_month_user_path(date: @first_day), class: "btn btn-md btn-primary" %>
@@ -171,6 +171,7 @@
     </tfoot>
   </table>
 </div>
+
 
 <!--モーダルウインドウ表示-->
 <div id="edit-over-time" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>

@@ -27,10 +27,10 @@
 
 <% if current_user.superior? %>
   <div class="waku">
-    【所属長承認申請のお知らせ】<%= link_to "〇件のお知らせがあります。", attendances_edit_overtime_notice_user_path, remote: true %>
+    【所属長承認申請のお知らせ】<%= link_to "〇件のお知らせがあります。", attendances_edit_superior_notice_user_path %>
   </div>
   <div class="waku">
-    【勤怠変更申請のお知らせ】<%= link_to "〇件のお知らせがあります。", attendances_edit_overtime_notice_user_path, remote: true %>
+    【勤怠変更申請のお知らせ】<%= link_to "〇件のお知らせがあります。", attendances_edit_attendance_notice_user_path %>
   </div>
   <div class="waku">
   【残業申請のお知らせ】<%= link_to "〇件のお知らせがあります。", attendances_edit_overtime_notice_user_path, remote: true %>

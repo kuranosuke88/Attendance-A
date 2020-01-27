@@ -31,9 +31,7 @@
                    <tr>
                     <td class><%= l(day.worked_on, format: :short) %></td>
                     <td>
-                      <%= form_for @user do |f| %>
-                        <%= f.collection_select :name, User.where(params[:id]), :name, :name %>
-                      <% end %>
+                      <%= f.select :decision, Sample.decisions.keys.to_a, { include_blank: "承認選択" } %>
                     </td>
                     <td><%= f.check_box :remember_me, id: "remember-me" %></td>
                     <td><%= link_to "確認", user_path(date: @first_day), class: "btn btn-primary" %></td>

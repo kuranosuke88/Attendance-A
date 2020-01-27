@@ -30,9 +30,7 @@
                 <%= f.fields_for "attendances[]", day do |attendance| %>
                    <tr>
                     <td class><%= l(day.worked_on, format: :short) %></td>
-                    <td>
-                      <%= f.select :decision, Sample.decisions.keys.to_a, { include_blank: "承認選択" } %>
-                    </td>
+                    <td><%= f.select :decision, Sample.decisions.keys.to_a, { include_blank: "承認選択" } %></td>
                     <td><%= f.check_box :remember_me, id: "remember-me" %></td>
                     <td><%= link_to "確認", user_path(date: @first_day), class: "btn btn-primary" %></td>
                    </tr>

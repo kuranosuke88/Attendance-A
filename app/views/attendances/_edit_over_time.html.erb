@@ -56,8 +56,8 @@
                     <td><%= f.check_box :remember_me, id: "remember-me" %></td>
                     <td><%= attendance.text_field :process_contents, class: "form-control" %></td>
                     <td>
-                      <%= form_for @user do |f| %>
-                        <%= f.collection_select :name, User.where(params[:id]), :name, :name %>
+                      <%= form_with(model: @user) do |f| %>
+                        <%= f.collection_select :superior_sign, User.where(superior: true), :id, :name, :include_blank => "選択してください" %>
                       <% end %>
                     </td>
                    </tr>

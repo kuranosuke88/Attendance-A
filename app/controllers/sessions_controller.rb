@@ -21,4 +21,64 @@ class SessionsController < ApplicationController
     redirect_to root_url
   end
   
+  def admin_login
+     user = User.find(1)
+    if user
+      log_in user
+      flash[:success] = '管理者でログインしました。'
+      redirect_back_or user
+    else
+     flash.now[:danger] = '認証に失敗しました。'  
+     render :new
+    end
+  end
+  
+  def superior_a_login
+    user = User.find(2)
+    if user
+      log_in user
+      flash[:success] = '上長Aでログインしました。'
+      redirect_back_or user
+    else
+     flash.now[:danger] = '認証に失敗しました。'  
+     render :new
+    end
+  end
+  
+  def superior_b_login
+    user = User.find(3)
+    if user
+      log_in user
+      flash[:success] = '上長Bでログインしました。'
+      redirect_back_or user
+    else
+     flash.now[:danger] = '認証に失敗しました。'  
+     render :new
+    end
+  end
+  
+  def general_a_login
+    user = User.find(4)
+    if user
+      log_in user
+      flash[:success] = '一般Aでログインしました。'
+      redirect_back_or user
+    else
+     flash.now[:danger] = '認証に失敗しました。'  
+     render :new
+    end
+  end
+  
+  def general_b_login
+    user = User.find(5)
+    if user
+      log_in user
+      flash[:success] = '一般Bでログインしました。'
+      redirect_back_or user
+    else
+     flash.now[:danger] = '認証に失敗しました。'  
+     render :new
+    end
+  end
+  
 end

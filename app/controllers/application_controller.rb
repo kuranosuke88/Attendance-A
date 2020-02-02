@@ -78,4 +78,11 @@ class ApplicationController < ActionController::Base
     redirect_to root_url
   end
   
+  def set_endtime_day
+    @attendance = User.find_by(◯◯: ○○).attendances(zaovertrue)
+    @attendance.save
+    @attendance = User.find_by(◯◯: ○○).attendances.find_by(date: @day)
+    @attendance.zangyo = true
+    @attendance.save
+  end
 end

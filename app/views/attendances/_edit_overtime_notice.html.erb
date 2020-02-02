@@ -14,9 +14,11 @@
         <div class="col-md-12">
          <table class="table table-bordered table-condensed" id="table-attendances">
             <thead>
-              <h4 class="modal-title">【上長からの残業申請】</h1>
-              
-              <h4 class="modal-title">【一般からの残業申請】</h1>
+              <% if @user.superior? %>
+               <h4 class="modal-title">【上長からの残業申請】</h1>
+              <% else %>
+               <h4 class="modal-title">【一般からの残業申請】</h1>
+              <% end %>
               <tr>
                 <th>日付</th>
                 <th>曜日</th>
@@ -31,7 +33,7 @@
             </thead>
             
             <tbody>
-              <% @attendances.each do |day| %>
+              <% @overtimes.each do |day| %> 
                 <%= f.fields_for "attendances[]", day do |attendance| %>
                    <tr>
                     <td class><%= l(day.worked_on, format: :short) %></td>
@@ -63,7 +65,7 @@
                     <td></td>
                     <td><%= attendance.text_field :process_contents, class: "form-control" %></td>
                     <td><%= f.select :decision, Sample.decisions.keys.to_a, { include_blank: "承認選択" } %></td>
-                    <td><%= f.check_box :remember_me, id: "remember-me" %></td>
+                    <td><%= f.check_box :check => true, id: "remember-me" %></td>
                     <td><%= link_to "確認", user_path(date: @first_day), class: "btn btn-primary" %></td>
                    </tr>
                  <% end %>

@@ -57,6 +57,7 @@ class AttendancesController < ApplicationController
       attendances_params.each do |id, item|
         attendance = Attendance.find(id)
         attendance.update_attributes!(item)
+        attendance.update_attributes!(overtime: true)
       end
     end
       flash[:success] = "終了予定時間を申請しました。"

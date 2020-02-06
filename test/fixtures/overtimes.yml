@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  overtime_day: 2020-02-04
+  end_time: 2020-02-04 14:08:17
+  process_contents: MyString
+  user: one
+
+two:
+  overtime_day: 2020-02-04
+  end_time: 2020-02-04 14:08:17
+  process_contents: MyString
+  user: two

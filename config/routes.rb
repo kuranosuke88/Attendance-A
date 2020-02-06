@@ -9,8 +9,11 @@ Rails.application.routes.draw do
   delete 'login', to: 'sessions#destroy'
   
   # ログインボタン(管理者、上長A、上長B、一般A、一般B)
-  patch 'login', to: 'sessions#admin_login', as: 'admin_login'
-  put 'login', to: 'sessions#superior_a_login', as: 'superior_a_login'
+  patch 'login', to: 'sessions#admin_login'
+  put 'login', to: 'sessions#superior_a_login'
+  put 'login', to: 'sessions#superior_b_login'
+  put 'login', to: 'sessions#general_a_login'
+  put 'login', to: 'sessions#general_b_login'
   
   # 出勤中社員一覧
   get 'list_of_attendees', to: 'list_of_attendees#index'

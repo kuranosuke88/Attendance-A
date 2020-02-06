@@ -1,5 +1,5 @@
 <% provide(:class_text, 'basic-info') %>
-<%= form_with(model: @user, url: attendances_update_over_time_user_path(date: @day), local: true, method: :patch) do |f| %>
+<%= form_with(model: @user, url: attendances_update_over_time_user_path(date: @day), overtime: true, method: :patch) do |f| %>
 
 <div class="modal-dialog modal-lg modal-dialog-center">
   <div class="modal-content">

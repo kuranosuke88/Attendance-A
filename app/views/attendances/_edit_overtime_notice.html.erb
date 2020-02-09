@@ -14,11 +14,9 @@
         <div class="col-md-12">
          <table class="table table-bordered table-condensed" id="table-attendances">
             <thead>
-              <% if @user.superior? %>
-               <h4 class="modal-title">【<%= @user.attendances.find(overtime) %>からの残業申請】</h1>
-              <% else %>
-               <h4 class="modal-title">【一般からの残業申請】</h1>
-              <% end %>
+              
+                <h4 class="modal-title">【<%= @user.name %>からの残業申請】</h4>
+              
               <tr>
                 <th>日付</th>
                 <th>曜日</th>

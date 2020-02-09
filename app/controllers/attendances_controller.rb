@@ -1,6 +1,6 @@
 class AttendancesController < ApplicationController
   protect_from_forgery
-  before_action :set_user, only: %i(edit_one_month update_one_month attendances_log edit_over_time update_over_time edit_overtime_notice edit_superior_notice edit_attendance_notice)
+  before_action :set_user, only: %i(edit_one_month update_one_month attendances_log edit_over_time update_over_time edit_overtime_notice edit_superior_notice)
   before_action :logged_in_user, only: %i(update edit_one_month edit_over_time)
   before_action :admin_or_correct_user, only: %i(update edit_one_month update_one_month edit_over_time)
   before_action :set_one_month, only: %i(edit_one_month)

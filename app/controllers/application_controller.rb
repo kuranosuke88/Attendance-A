@@ -77,12 +77,5 @@ class ApplicationController < ActionController::Base
     flash[:danger] = "ページ情報の取得に失敗しました。再アクセスしてください。"
     redirect_to root_url
   end
-  
-  def set_endtime_day
-    @attendance = User.find_by(◯◯: ○○).attendances(zaovertrue)
-    @attendance.save
-    @attendance = User.find_by(◯◯: ○○).attendances.find_by(date: @day)
-    @attendance.zangyo = true
-    @attendance.save
-  end
+
 end

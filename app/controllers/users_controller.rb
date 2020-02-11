@@ -93,10 +93,10 @@ class UsersController < ApplicationController
   private
     
     def user_params
-      params.require(:user).permit(:name, :email, :password, :password_confirmation)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :department, :basic_time, :work_time, :work_finish_time, :user_employee_number, :user_uid)
     end
     
     def basic_info_params
-      params.require(:user).permit(:department, :basic_time, :work_time, :work_finish_time, :user_employee_number, :user_uid)
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :department, :basic_time, :work_time, :work_finish_time, :user_employee_number, :user_uid)
     end
 end

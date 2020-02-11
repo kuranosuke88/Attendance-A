@@ -74,7 +74,8 @@ class AttendancesController < ApplicationController
   end
   
   def edit_overtime_notice
-    @overtimes = Attendance.where(overtime: true)
+    @overtimes = Attendance.where(overtime: true).includes(:user)
+    @overtime_users = Attendance.where(overtime: true).pluck(:user_id)
   end
   
   private

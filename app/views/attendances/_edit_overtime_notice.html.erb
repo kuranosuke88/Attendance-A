@@ -56,8 +56,8 @@
                       <% end %>
                     </td>
                     <td><%= attendance.time_field :end_time, class: "form-control" %></td>
-                    <td><%= format_basic_info(day.user.work_time) %></td>
-                    <td></td>
+                    <td><%= format_basic_info(day.user.work_finish_time) %></td>
+                    <td><%= working_times(day.user.work_finish_time, day.end_time) %></td>
                     <td><%= attendance.text_field :process_contents, class: "form-control" %></td>
                     <td><%= f.select :decision, Sample.decisions.keys.to_a, { include_blank: "承認選択" } %></td>
                     <td><%= f.check_box :check => true, id: "remember-me" %></td>

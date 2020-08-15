@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete 'login', to: 'sessions#destroy'
+  patch 'login', to: 'sessions#update'
   
   # 出勤中社員一覧
   get 'list_of_attendees', to: 'list_of_attendees#index'
@@ -24,6 +25,9 @@ Rails.application.routes.draw do
       get 'attendances/attendances_log'
       get 'attendances/edit_over_time'
       patch 'attendances/update_over_time'
+      get 'attendances/edit_overtime_notice'
+      get 'attendances/edit_superior_notice'
+      get 'attendances/edit_attendance_notice'
     end
     resources :attendances, only: :update
   end

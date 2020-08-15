@@ -7,9 +7,9 @@
 
 <div class="center jumbotron">
   <p>動作確認は↓からどうぞ</p>
-  <%= link_to "管理者", login_path, class: "btn btn-lg btn-primary" %>
-  <%= link_to "上長A", login_path, class: "btn btn-lg btn-primary" %>
-  <%= link_to "上長B", login_path, class: "btn btn-lg btn-primary" %>
-  <%= link_to "一般A", login_path, class: "btn btn-lg btn-primary" %>
-  <%= link_to "一般B", login_path, class: "btn btn-lg btn-primary" %>
+  <%= link_to "管理者", login_path(no: 1), method: :patch, class: "btn btn-lg btn-primary" %>
+  <%= link_to "上長A", login_path(no: 2), method: :patch, class: "btn btn-lg btn-warning" %>
+  <%= link_to "上長B", login_path(no: 3), method: :patch, class: "btn btn-lg btn-info" %>
+  <%= link_to "一般A", login_path(no: 4), method: :patch, class: "btn btn-lg btn-success" %>
+  <%= link_to "一般B", login_path(no: 5), method: :patch, class: "btn btn-lg btn-danger" %>
 </div>

@@ -1,4 +1,5 @@
 class Attendance < ApplicationRecord
+  FLAG_FIELDS = [:overtime]
   belongs_to :user
   
   validates :worked_on, presence: true
@@ -18,4 +19,19 @@ class Attendance < ApplicationRecord
       errors.add(:started_at, "より早い退勤時間は無効です。") if started_at > finished_at
     end
   end
+  
+  def true_flags
+    ret = []
+    FLAG_FIELDS.each do |flag_name|
+      if self[flag_name]
+        ret << flag_name
+      end
+    end
+    ret
+  end
+  
+  def i18n_true_flags
+    true_flags.map{ |flag_name| Attendance.human_attribute_name(flag_name) }
+  end
+  
 end

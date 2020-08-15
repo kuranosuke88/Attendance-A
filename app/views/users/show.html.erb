@@ -25,6 +25,18 @@
   </table>
 </div>
 
+<% if current_user.superior? %>
+  <div class="waku">
+    【所属長承認申請のお知らせ】<%= link_to "〇件のお知らせがあります。", attendances_edit_superior_notice_user_path %>
+  </div>
+  <div class="waku">
+    【勤怠変更申請のお知らせ】<%= link_to "〇件のお知らせがあります。", attendances_edit_attendance_notice_user_path %>
+  </div>
+  <div class="waku">
+  【残業申請のお知らせ】<%= link_to "#{@overtimes_sum}件のお知らせがあります。", attendances_edit_overtime_notice_user_path, remote: true %>
+  </div>
+<% end %>
+
 <div class="btn-users-show">
   <%= link_to "勤怠編集", attendances_edit_one_month_user_path(date: @first_day), class: "btn btn-primary" %>
   <%= link_to "CSV出力", user_path(date: @first_day, format: :csv), class: "btn btn-primary" %>
@@ -67,7 +79,7 @@
       <% @attendances.each do |day| %>
         <tr>
           <td>
-            <%= link_to "残業申請", attendances_edit_over_time_user_path(date: @first_day), remote: true, class: "btn btn-primary" %>
+            <%= link_to "残業申請", attendances_edit_over_time_user_path(@user, params: { day: day.worked_on  }), remote: true, class: "btn btn-primary" %>
           </td>
           <td><%= l(day.worked_on, format: :short) %></td>
           <td>
@@ -114,10 +126,18 @@
             <% end %>
           </td>
           <td><%= day.note %></td>
+          <td>
+            <% unless day.end_time.nil? %>
+              <%= l(day.end_time, format: :hour) %>
+            <% end %>
+          </td>
+          <td>
+            <% unless day.end_time.nil? %>
+              <%= l(day.end_time, format: :minit) %>
+            <% end %>
+          </td>
           <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td><%= day.process_contents %></td>
           <td></td>
         </tr>
       <% end %>
@@ -138,8 +158,8 @@
         <td colspan="2"><%= format("%.2f", @total_working_times.to_f) %></td>
         <td colspan="9"></td>
         <td rowspan="2">
-          <%= form_for @user do |f| %>
-            <%= f.collection_select :name, User.where(params[:id]), :name, :name %>
+          <%= form_with(model: @user) do |f| %>
+            <%= f.collection_select :superior_sign, User.where(superior: true), :id, :name, :include_blank => "選択してください" %>
           <% end %>
           <div class="btn-Application-for-approval">
             <%= link_to "承認申請", attendances_edit_one_month_user_path(date: @first_day), class: "btn btn-md btn-primary" %>
@@ -149,6 +169,7 @@
     </tfoot>
   </table>
 </div>
+
 
 <!--モーダルウインドウ表示-->
 <div id="edit-over-time" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>

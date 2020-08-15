@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  enum: MyString
+  decision: MyString
+  {: MyString
+  なし: MyString
+  =: MyString
+  申請中: MyString
+  =: MyString
+  承認: MyString
+  =: MyString
+  否認: MyString
+  =: MyString
+  }: MyString
+
+two:
+  enum: MyString
+  decision: MyString
+  {: MyString
+  なし: MyString
+  =: MyString
+  申請中: MyString
+  =: MyString
+  承認: MyString
+  =: MyString
+  否認: MyString
+  =: MyString
+  }: MyString

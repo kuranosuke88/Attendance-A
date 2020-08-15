@@ -33,6 +33,11 @@ class ApplicationController < ActionController::Base
     def admin_user
       redirect_to root_url unless current_user.admin?
     end
+    
+    # 上長権限者か判定
+    def superior_user
+      redirect_to root_url unless current_user.superior?
+    end
   
   # ページ出力前に1ヶ月分のデータの存在を確認・セットします。
   def set_one_month 
@@ -56,4 +61,21 @@ class ApplicationController < ActionController::Base
     redirect_to root_url
   end
   
+  # ページ出力前に1日分のデータの存在を確認・セットします。
+  def set_one_day
+    @day = params[:day].nil? ?
+    Date.current.beginning_of_day : params[:day].to_date
+    one_day = [@day]
+    
+    @attendances = @user.attendances.where(worked_on: @day)
+    unless one_day.count == @attendances.count
+      ActiveRecord::Base.transaction do
+        one_day.each { |day| @user.attendances.create!(worked_on: day) }
+      end
+    end
+  rescue ActiveRecord::RecordInvalid
+    flash[:danger] = "ページ情報の取得に失敗しました。再アクセスしてください。"
+    redirect_to root_url
+  end
+
 end

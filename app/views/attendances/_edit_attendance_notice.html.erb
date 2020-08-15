@@ -1,5 +1,5 @@
 <% provide(:class_text, 'basic-info') %>
-<%= form_with(model: @user, url: attendances_update_over_time_user_path(date: @day), overtime: true, method: :patch) do |f| %>
+<%= form_with(model: @user, url: attendances_update_over_time_user_path(date: @day), local: true, method: :patch) do |f| %>
 
 <div class="modal-dialog modal-lg modal-dialog-center">
   <div class="modal-content">
@@ -7,20 +7,41 @@
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
-      <h1 class="modal-title">【残業申請】</h1>
+      <h1 class="modal-title">【勤怠変更申請のお知らせ】</h1>
     </div>
     <div class="modal-body">
       <div class="row">
         <div class="col-md-12">
          <table class="table table-bordered table-condensed" id="table-attendances">
             <thead>
+              <h4 class="modal-title">【上長Aからの勤怠変更申請】</h1>
+              
+              <h4 class="modal-title">【一般からの勤怠変更申請】</h1>
               <tr>
-                <th>日付</th>
-                <th>曜日</th>
-                <th>終了予定時間</th>
-                <th>翌日</th>
-                <th>業務処理内容</th>
-                <th>指示者確認㊞</th>
+                <th rowspan="3">日付</th>
+                <th rowspan="3">曜日</th>
+                <th colspan="4">変更前</th>
+                <th colspan="4">変更後</th>
+                <th rowspan="3">備考</th>
+                <th rowspan="3">指示者確認㊞</th>
+                <th rowspan="3">変更</th>
+                <th rowspan="3">勤怠を確認する</th>
+              </tr>
+              <tr>
+                <th colspan="2">出社</th>
+                <th colspan="2">退社</th>
+                <th colspan="2">出社</th>
+                <th colspan="2">退社</th>
+              </tr> 
+              <tr>
+                <th>時</th>
+                <th>分</th>
+                <th>時</th>
+                <th>分</th>
+                <th>時</th>
+                <th>分</th>
+                <th>時</th>
+                <th>分</th>
               </tr>
             </thead>
             
@@ -52,21 +73,25 @@
                         <font color="red"><%= $days_of_the_week[day.worked_on.wday] %></font>
                       <% end %>
                     </td>
-                    <td><%= attendance.time_field :end_time, class: "form-control" %></td>
-                    <td><%= f.check_box :remember_me, id: "remember-me" %></td>
+                    <td><%= l(day.started_at, format: :hour) if day.started_at.present? %></td>
+                    <td><%= l(day.started_at, format: :minit) if day.started_at.present? %></td>
+                    <td><%= l(day.started_at, format: :hour) if day.started_at.present? %></td>
+                    <td><%= l(day.started_at, format: :minit) if day.started_at.present? %></td>
+                    <td><%= l(day.started_at, format: :hour) if day.started_at.present? %></td>
+                    <td><%= l(day.started_at, format: :minit) if day.started_at.present? %></td>
+                    <td><%= l(day.started_at, format: :hour) if day.started_at.present? %></td>
+                    <td><%= l(day.started_at, format: :minit) if day.started_at.present? %></td>
                     <td><%= attendance.text_field :process_contents, class: "form-control" %></td>
-                    <td>
-                      <%= form_with(model: @user) do |f| %>
-                        <%= f.collection_select :superior_sign, User.where(superior: true), :id, :name, :include_blank => "選択してください" %>
-                      <% end %>
-                    </td>
+                    <td><%= f.select :decision, Sample.decisions.keys.to_a, { include_blank: "承認選択" } %></td>
+                    <td><%= f.check_box :remember_me, id: "remember-me" %></td>
+                    <td><%= link_to "確認", user_path(date: @first_day), class: "btn btn-primary" %></td>
                    </tr>
                  <% end %>
                <% end %>
             </tbody>
          </table>
             <div class="center">
-              <%= f.submit "残業申請", class: "btn btn-primary btn-#{yield(:class_text)}" %>
+              <%= f.submit "承認結果を送信する", class: "btn btn-primary btn-#{yield(:class_text)}" %>
               <button type="button" class="btn btn-default btn-<%= yield(:class_text) %>" data-dismiss="modal">
                 キャンセル
               </button>
